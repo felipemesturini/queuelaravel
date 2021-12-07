@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\MailJob;
+use App\Jobs\RedisJob;
 use App\Mail\FilasMail;
 use App\Mail\WelcomeMail;
 use Illuminate\Support\Facades\Mail;
@@ -57,5 +58,14 @@ class MailController extends Controller
         $cliente->email = 'fmesturini@gmail.com';
         $cliente->url = 'https://google.com.br';
         MailJob::dispatchSync($cliente);
+    }
+
+    public function usingJobRedis()
+    {
+        $cliente = new \stdClass();
+        $cliente->nome = 'Felipe Mesturini';
+        $cliente->email = 'fmesturini@gmail.com';
+        $cliente->url = 'https://google.com.br';
+        RedisJob::dispatch($cliente);
     }
 }

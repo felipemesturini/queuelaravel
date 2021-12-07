@@ -28,3 +28,14 @@ Route::get('/async-mail', [MailController::class, 'asyncMail']);
 Route::get('/async-mail-welcome', [MailController::class, 'asyncMailWelcome']);
 Route::get('/async-job', [MailController::class, 'usingJob']);
 Route::get('/sync-job', [MailController::class, 'usingJobSinc']);
+Route::get('/async-job-redis', [MailController::class, 'usingJobRedis']);
+
+
+Route::get('redisAdd', function () {
+   \Illuminate\Support\Facades\Redis::set('name', \Illuminate\Support\Facades\Hash::make('Felipe'));
+   return \Illuminate\Support\Facades\Redis::get('name');
+});
+
+Route::get('redisGet', function () {
+    return \Illuminate\Support\Facades\Redis::get('name');
+});

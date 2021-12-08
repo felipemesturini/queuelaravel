@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EstoqueController;
 use App\Http\Controllers\MailController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +30,7 @@ Route::get('/async-mail-welcome', [MailController::class, 'asyncMailWelcome']);
 Route::get('/async-job', [MailController::class, 'usingJob']);
 Route::get('/sync-job', [MailController::class, 'usingJobSinc']);
 Route::get('/async-job-redis', [MailController::class, 'usingJobRedis']);
+Route::get('/estoque-job', [EstoqueController::class, 'movimentar']);
 
 
 Route::get('redisAdd', function () {

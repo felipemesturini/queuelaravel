@@ -31,6 +31,7 @@ Route::get('/async-job', [MailController::class, 'usingJob']);
 Route::get('/sync-job', [MailController::class, 'usingJobSinc']);
 Route::get('/async-job-redis', [MailController::class, 'usingJobRedis']);
 Route::get('/estoque-job', [EstoqueController::class, 'movimentar']);
+Route::get('/estoque-job-dispatch', [EstoqueController::class, 'jobDispatch']);
 
 
 Route::get('redisAdd', function () {

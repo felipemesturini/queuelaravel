@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Domains\Estoque;
 use App\Jobs\EstoqueJob;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class EstoqueController extends Controller
 {
@@ -13,4 +14,14 @@ class EstoqueController extends Controller
         $estoque = new Estoque(1, 100);
         EstoqueJob::dispatch($estoque);
     }
+
+    public function jobDispatch()
+    {
+        $estoque = new Estoque(1, 100);
+        dispatch(function () use ($estoque) {
+            Log::info("Movimentando estoque {$estoque->id} - {$estoque->qtde}");
+        })->delay(now()->addSeconds(10));
+       // EstoqueJob::dispatch($estoque);
+    }
+
 }

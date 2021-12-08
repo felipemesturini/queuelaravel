@@ -32,6 +32,7 @@ class MailController extends Controller
 
     public function asyncMailWelcome()
     {
+        //USando a interface ShouldQueue
         $cliente = new \stdClass();
         $cliente->nome = 'Felipe Mesturini';
         $cliente->email = 'fmesturini@gmail.com';
@@ -42,13 +43,11 @@ class MailController extends Controller
 
     public function usingJob()
     {
-//        MailJob::dispatch()->onQueue('mails');
         $cliente = new \stdClass();
         $cliente->nome = 'Felipe Mesturini';
         $cliente->email = 'fmesturini@gmail.com';
         $cliente->url = 'https://google.com.br';
         MailJob::dispatchIf(is_object($cliente), $cliente);
-
     }
 
     public function usingJobSinc()

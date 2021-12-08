@@ -2,13 +2,13 @@
 
 namespace App\Jobs;
 
-use App\Mail\WelcomeMail;
+use App\Mail\VerifiedMail;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class MailJob implements ShouldQueue
@@ -26,6 +26,7 @@ class MailJob implements ShouldQueue
     public function __construct($cliente)
     {
         $this->cliente = $cliente;
+        Log::info($cliente->email);
     }
 
     /**
@@ -35,10 +36,6 @@ class MailJob implements ShouldQueue
      */
     public function handle()
     {
-        $cliente = new \stdClass();
-        $cliente->nome = 'Felipe Mesturini';
-        $cliente->email = 'fmesturini@gmail.com';
-        $cliente->url = 'https://google.com.br';
-        Mail::send(new WelcomeMail($cliente));
+        Mail::send(new VerifiedMail($this->cliente));
     }
 }

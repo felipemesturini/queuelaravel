@@ -2,12 +2,15 @@
 
 namespace App\Jobs;
 
+use App\Mail\VerifiedMail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class RedisJob implements ShouldQueue
 {
@@ -33,6 +36,8 @@ class RedisJob implements ShouldQueue
      */
     public function handle()
     {
-        dd("Job dispatch by redis {$this->cliente}");
+        //dd($this->cliente);
+        Log::info("Enviando email {$this->cliente->nome}");
+        Mail::send(new VerifiedMail($this->cliente));
     }
 }

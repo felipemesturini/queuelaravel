@@ -1,0 +1,15 @@
+sail php artisan make:mail VerifiedMail --markdown=mail.markdown.verified
+
+sail php artisan queue:table
+
+sail php artisan make:job
+
+
+sudo apt-get install supervisor
+
+sudo supervisorctl reread
+sudo supervisorctl update
+sudo supervisorctl start laravel-worker:*
+
+
+/home/felipe/dev/Laravel/queuelaravel/vendor/laravel/sail/bin/sail artisan queue:work redis --sleep=3 --tries=3 --max-time=3600

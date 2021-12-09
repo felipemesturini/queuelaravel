@@ -20,8 +20,8 @@ class EstoqueController extends Controller
         $estoque = new Estoque(1, 100);
         dispatch(function () use ($estoque) {
             Log::info("Movimentando estoque {$estoque->id} - {$estoque->qtde}");
+            //Operação para movimentar estoque
         })->delay(now()->addSeconds(10));
-       // EstoqueJob::dispatch($estoque);
     }
 
 }

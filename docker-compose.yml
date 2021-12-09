@@ -8,6 +8,7 @@ services:
             args:
                 WWWGROUP: '${WWWGROUP}'
         image: sail-8.0/app
+        container_name: sail_php
         extra_hosts:
             - 'host.docker.internal:host-gateway'
         ports:
